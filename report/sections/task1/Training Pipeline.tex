@@ -1,0 +1,19 @@
+\subsection{Training Pipeline}
+
+The training pipeline is implemented in \texttt{train.py}, which supports both ResNet-based models and ViT-Tiny. The framework includes modular components for optimizer construction, learning rate scheduling, model evaluation, checkpoint saving, and training history recording.
+
+\subsubsection{Optimization and Learning Rate Scheduling}
+
+Two optimizers are mainly considered in subsequent experiments: SGD with momentum and AdamW. The optimizer is constructed using parameter groups, where the pretrained backbone and the newly added modules are assigned different learning rates. Specifically, the classification head and SE modules use a larger learning rate, while the pretrained backbone is fine-tuned using a smaller learning rate.
+
+Weight decay is applied to weight parameters but excluded from bias and normalization parameters. This parameter grouping strategy is applied consistently to both ResNet-based models and ViT-Tiny.
+
+For learning rate scheduling, cosine annealing is adopted in all experiments.
+
+The training framework also supports optional backbone warmup by temporarily freezing pretrained backbone parameters during early epochs. However, preliminary experiments show that this strategy provides no significant improvement, and it is therefore not used in the final experiments.
+
+\subsubsection{Training and Validation Procedure}
+
+All classification models are trained using cross-entropy loss. During training, the framework records the average training loss and training accuracy for each epoch. After each epoch, the model is evaluated on the validation set to obtain validation loss and validation accuracy.
+
+Model selection is performed according to validation accuracy. The checkpoint with the highest validation accuracy is saved as the best model. In addition, training statistics such as loss curves, accuracy curves, and learning rate history are recorded throughout the training process for later visualization and analysis.

@@ -1,0 +1,5 @@
+\subsection{Baseline Transfer Learning Model}
+
+ResNet-34 pretrained on ImageNet is adopted as the baseline architecture. The original fully connected classification layer is replaced by a new linear layer with 37 output dimensions corresponding to the categories in the Oxford-IIIT Pet Dataset.
+
+During training, the newly added classification head is randomly initialized and trained from scratch, while the pretrained backbone parameters are fine-tuned using a smaller learning rate. This setting preserves generic visual representations learned from ImageNet while adapting the model to the target classification task.

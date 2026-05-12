@@ -1,0 +1,19 @@
+\subsection{Attention-Based Architectures}
+
+Besides the baseline ResNet-34 model, additional experiments are conducted using architectures with attention mechanisms. In particular, SE-blocks are incorporated into the ResNet backbone to introduce channel-wise attention, and a lightweight Vision Transformer model (ViT-Tiny) is also implemented for comparison.
+
+\subsubsection{SE Layer Design and Initialization Strategy}
+
+SE-blocks are inserted after each ResNet BasicBlock. The SE module first performs global average pooling, followed by two fully connected layers and a sigmoid activation to generate channel-wise attention weights.
+
+A customized initialization strategy is adopted when pretrained ResNet weights are used. The first fully connected layer is initialized with standard Kaiming initialization, while the second fully connected layer is initialized with zero weights and a positive bias of 3. Formally, the attention scaling factor is initialized as
+\[
+\sigma(0 \cdot x + 3) = \sigma(3) \approx 0.95,
+\]
+where $\sigma(\cdot)$ denotes the sigmoid function.
+
+As a result, the SE module initially behaves approximately as an identity scaling operation, preserving most of the pretrained residual representations during early training. In preliminary experiments, directly applying standard random initialization to the SE layers significantly reduced the effectiveness of pretrained initialization and led to noticeably worse convergence behavior.
+
+\subsubsection{Vision Transformer}
+
+In addition to convolutional architectures, a ViT-Tiny model based on \texttt{vit\_tiny\_patch16\_224} is implemented using the \texttt{timm} library. Similar to the ResNet baseline, the original classification head is replaced with a new linear layer corresponding to the 37 target categories.
