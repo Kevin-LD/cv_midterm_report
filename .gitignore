@@ -1,0 +1,13 @@
+# Latex 编译文件
+report/*.aux
+report/*.log
+report/*.toc
+report/*.out
+report/*.fls
+report/*.fdb_latexmk
+report/*.synctex.gz
+report/*.bbl
+report/*.blg
+
+# report
+report/*.pdf
