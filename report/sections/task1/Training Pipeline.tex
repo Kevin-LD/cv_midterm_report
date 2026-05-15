@@ -1,6 +1,6 @@
 \subsection{Training Pipeline}
 
-The training pipeline is implemented in \texttt{train.py}, which supports both ResNet-based models and ViT-Tiny. The framework includes modular components for optimizer construction, learning rate scheduling, model evaluation, checkpoint saving, and training history recording.
+The training pipeline is implemented in \texttt{train.py}, which supports both ResNet-based models and ViT-Tiny. The framework includes modular components for optimizer construction, learning rate scheduling, model evaluation, checkpoint saving, and training monitoring and history recording through \texttt{wandb}.
 
 \subsubsection{Optimization and Learning Rate Scheduling}
 
@@ -16,4 +16,4 @@ The training framework also supports optional backbone warmup by temporarily fre
 
 All classification models are trained using cross-entropy loss. During training, the framework records the average training loss and training accuracy for each epoch. After each epoch, the model is evaluated on the validation set to obtain validation loss and validation accuracy.
 
-Model selection is performed according to validation accuracy. The checkpoint with the highest validation accuracy is saved as the best model. In addition, training statistics such as loss curves, accuracy curves, and learning rate history are recorded throughout the training process for later visualization and analysis.
+Model selection is performed according to validation accuracy. The checkpoint with the highest validation accuracy is saved as the best model.

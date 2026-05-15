@@ -4,11 +4,13 @@
 
 \section{Task 1: Transfer Learning for Pet Classification}
 
-In this task, we study image classification on the Oxford-IIIT Pet Dataset using deep neural networks. The primary objective is to investigate the effectiveness of transfer learning by fine-tuning an ImageNet-pretrained ResNet-34 model. The original classification head is replaced to match the target category number, while the pretrained backbone is fine-tuned with a smaller learning rate.
+In this task, we investigate fine-grained image classification on the Oxford-IIIT Pet Dataset using deep neural networks. The primary objective is to study the effectiveness of transfer learning by fine-tuning ImageNet-pretrained models on a relatively small-scale pet breed classification dataset. A pretrained ResNet-34 model is adopted as the baseline architecture, where the original classification head is replaced to match the 37 target categories.
 
-Based on the baseline model, we further analyze the influence of several important hyperparameters, including optimizer type, backbone learning rate, classifier learning rate, batch size, and weight decay. An ablation study is also conducted to compare pretrained initialization with random initialization, in order to evaluate the contribution of pretrained representations.
+Based on the baseline model, we further explore the influence of data augmentation strategies, optimization settings, and training hyperparameters, including optimizer type, learning rate configuration, batch size, weight decay, and training epochs. A multi-stage hyperparameter search is conducted to obtain the final training configuration.
 
-In addition, attention mechanisms are incorporated into the baseline architecture for comparison. Specifically, SE-blocks are integrated into the ResNet model, and a lightweight Vision Transformer model is also implemented as an alternative architecture. Experimental results are evaluated primarily using classification accuracy on the validation and test sets.
+To evaluate the contribution of pretrained representations, an ablation study is performed by comparing pretrained initialization with random initialization under different optimization settings. In addition, attention-based architectures are investigated for comparison, including SE-enhanced ResNet-34 and a lightweight Vision Transformer model.
+
+Model performance is analyzed using validation and test accuracy together with training dynamics, confusion matrix analysis, representative error cases, and DeepDream visualizations, providing further interpretation of the learned visual representations and remaining classification challenges.
 
 
 \input{sections/task1/Dataset and Data Preprocessing.tex}
@@ -16,50 +18,8 @@ In addition, attention mechanisms are incorporated into the baseline architectur
 \input{sections/task1/Attention-Based Architectures.tex}
 \input{sections/task1/Training Pipeline.tex}
 \input{sections/task1/Hyperparameter Analysis.tex}
+\input{sections/task1/Training Dynamics.tex}
 \input{sections/task1/Pretraining Ablation Study.tex}
-
-% =========================
-% Experimental Results
-% =========================
-
-\subsection{Experimental Results}
-
-% TODO:
-% Main quantitative results table
-% Accuracy comparison
-% Baseline vs SE vs ViT-Tiny
-% Pretrained vs Random Initialization
-
-% =========================
-% Visualization
-% =========================
-
-\subsection{Training Visualization}
-
-% TODO:
-% Loss curves
-% Accuracy curves
-% Hyperparameter search visualization
-% Ablation visualization
-
-% =========================
-% Discussion
-% =========================
-
-\subsection{Discussion}
-
-% TODO:
-% Observations about transfer learning
-% Effect of SE block
-% Hyperparameter sensitivity
-% Why pretrained initialization helps
-% Discussion about initialization strategy
-
-% =========================
-% Summary
-% =========================
-
-\subsection{Summary}
-
-% TODO:
-% Summarize key findings of Task 1
+\input{sections/task1/Attention-Based Architecture Comparison.tex}
+\input{sections/task1/Model Evaluation and Interpretation.tex}
+\input{sections/task1/Summary.tex}

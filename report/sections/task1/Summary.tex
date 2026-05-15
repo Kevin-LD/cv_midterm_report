@@ -1,0 +1,7 @@
+\subsection{Summary}
+
+In this task, we investigate transfer learning for fine-grained pet breed classification on the Oxford-IIIT Pet Dataset. A complete training framework is developed based on pretrained ResNet-34, including data preprocessing, augmentation design, hyperparameter search, optimization strategies, training monitoring, and model evaluation.
+
+Through multi-stage hyperparameter analysis, the final baseline configuration achieves a validation accuracy of 95.38\% and a test accuracy of 92.53\%. The pretraining ablation study further demonstrates that ImageNet pretrained initialization is essential for effective optimization and generalization under the current experimental setting.
+
+Additional experiments with SE-enhanced ResNet-34 and ViT-Tiny show that introducing attention mechanisms or transformer-based architectures does not improve performance over the carefully tuned baseline model. Finally, confusion matrix analysis, error case analysis, and DeepDream visualization provide further interpretation of the learned visual representations and the remaining classification challenges.
