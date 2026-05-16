@@ -1,0 +1,11 @@
+\subsection{Summary}
+
+In this task, a complete object detection and multi-object tracking pipeline is developed based on YOLOv8 and ByteTrack. Two YOLOv8 configurations are trained and evaluated on the VisDrone2019-DET dataset. Experimental results show that increasing model capacity and input resolution significantly improves detection performance. The final YOLOv8s-$768$ configuration achieves
+\[
+\mathrm{mAP@50}=44\%, \qquad
+\mathrm{mAP@50\text{-}95}=26\%.
+\]
+
+The trained detector is further integrated with ByteTrack for video multi-object tracking on a real-world urban traffic scene. Experimental analysis demonstrates that the system can successfully recover original tracking IDs under both short-term target interaction and long-term environmental occlusion. In addition, a line-crossing counting module is implemented based on tracking trajectories and geometric intersection tests, achieving accurate vehicle counting results in practical traffic scenarios.
+
+Overall, the proposed pipeline successfully completes object detection, multi-object tracking, occlusion recovery, and line-crossing counting within a unified framework.

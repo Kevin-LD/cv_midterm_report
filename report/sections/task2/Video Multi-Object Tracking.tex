@@ -1,0 +1,28 @@
+\subsection{Video Multi-Object Tracking}
+
+The trained YOLOv8 detector is integrated with the ByteTrack multi-object tracking algorithm through the built-in tracking framework provided by Ultralytics YOLOv8. The tracking pipeline performs object detection and identity association jointly on each video frame, producing bounding boxes, category labels, and persistent tracking IDs for individual objects.
+
+The test video is recorded from a relatively high viewpoint overlooking the circular road intersection near the IFC area in Lujiazui, Shanghai. Besides the vehicle roundabout, the scene also contains a circular pedestrian overpass crossing above the roadway. The video contains several hundred pedestrians and over one hundred vehicles throughout the sequence.
+
+This scene is selected because its high viewing angle and dense small-scale objects closely resemble the characteristics of the VisDrone dataset. In addition, the pedestrian overpass frequently occludes vehicles underneath, creating challenging scenarios for multi-object tracking and ID association.
+
+The final inference configuration uses
+\[
+\texttt{imgsz} = 2176,
+\]
+which is selected as the nearest multiple of 32 to the smaller dimension of the input video resolution. This high-resolution inference setting helps preserve small-object details during tracking. Other inference parameters follow the default YOLOv8 tracking configuration, including
+\[
+\texttt{conf} = 0.25, \qquad
+\texttt{iou} = 0.45.
+\]
+
+For each frame, the detector first predicts object bounding boxes and category confidences. ByteTrack then associates detections across consecutive frames according to motion consistency and detection confidence, assigning a persistent tracking ID to each object. The tracking results are visualized directly on the output video together with category labels and object trajectories.
+
+Figure~\ref{fig:tracking_result} shows the first frame of the tracking inference result. Most pedestrians and nearly all vehicles are successfully detected and assigned valid tracking IDs, including many distant small-scale objects. This result demonstrates that the trained detector achieves strong detection capability in dense aerial-style urban scenes. The complete tracking inference video can be found through the link provided in the Appendix.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/task2/frames/Timeline 1_01_00_00_00.jpg}
+    \caption{Example frame from the video multi-object tracking result. Each object is assigned a persistent tracking ID.}
+    \label{fig:tracking_result}
+\end{figure}

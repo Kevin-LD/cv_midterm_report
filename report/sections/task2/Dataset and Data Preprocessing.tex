@@ -6,13 +6,22 @@ The object detection model is trained and evaluated on the VisDrone2019-DET data
 
 The dataset provides annotated bounding boxes for multiple object categories, including pedestrians, cars, buses, bicycles, trucks, and so on. Representative samples from the dataset are shown in Figure~\ref{fig:visdrone_samples}. Both daytime and nighttime scenes contain dense object distributions with many small-scale targets, which makes the detection task considerably more challenging.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.48\textwidth]{figures/task2/data_visualization_9999950_00000_d_0000067.jpg}
     \hfill
     \includegraphics[width=0.48\textwidth]{figures/task2/data_visualization_9999998_00294_d_0000247.jpg}
     \caption{Representative samples from the VisDrone2019-DET dataset. The left image shows a nighttime scene, while the right image shows a daytime scene. Both scenes contain dense distributions of small objects.}
     \label{fig:visdrone_samples}
+\end{figure}
+
+Figure~\ref{fig:visdrone_label_stats} shows several statistical visualizations of the training set annotations. The category distribution is noticeably imbalanced, with the \texttt{car} category containing the largest number of instances, while some rare categories such as \texttt{awning-tricycle} contain significantly fewer samples. The bounding box statistics further show that the dataset is dominated by small objects with diverse aspect ratios.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/task2/labels.jpg}
+    \caption{Visualization statistics of the VisDrone training annotations, including category distribution, bounding box overlap visualization, center-point heatmap, and width-height heatmap.}
+    \label{fig:visdrone_label_stats}
 \end{figure}
 
 \subsubsection{Data Preparation and Preprocessing}

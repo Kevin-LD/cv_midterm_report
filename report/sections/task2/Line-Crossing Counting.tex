@@ -1,0 +1,75 @@
+\subsection{Line-Crossing Counting}
+
+\subsubsection{Counting Strategy}
+
+Based on the tracking results produced by ByteTrack, a line-crossing counting module is further implemented to count the number of tracked objects passing through a predefined counting line segment. The counting segment is defined by two endpoints
+\[
+L_1=(x_1,y_1), \qquad L_2=(x_2,y_2).
+\]
+
+For each tracked object with tracking ID \(k\), the bottom-center point of its bounding box is selected as the representative motion point:
+\[
+p_t^{(k)} = \left( \frac{x_{\min}+x_{\max}}{2},\ y_{\max} \right),
+\]
+where \((x_{\min}, y_{\min}, x_{\max}, y_{\max})\) denotes the bounding box coordinates at frame \(t\).
+
+The bottom-center point is used because the video is captured from an elevated oblique viewpoint. Under this perspective, the bottom of the bounding box better approximates the actual ground contact position of the vehicle, producing a crossing behavior that is more consistent with human visual perception. If needed, the geometric center of the bounding box could also be used as an alternative reference point.
+
+The motion trajectory between two consecutive frames is represented by the line segment
+\[
+\overline{p_{t-1}^{(k)} p_t^{(k)}}.
+\]
+A crossing event is counted if this trajectory segment intersects the predefined counting segment
+\[
+\overline{L_1L_2}.
+\]
+
+The intersection test is implemented using the orientation property of the planar cross product. For three points \(A,B,C\), consider the \(z\)-component of the 3D cross product
+\[
+\overrightarrow{AB}\times\overrightarrow{AC},
+\]
+which can be written as
+\[
+(B_x-A_x)(C_y-A_y)
+-
+(B_y-A_y)(C_x-A_x).
+\]
+determines the rotation direction from vector \(\overrightarrow{AB}\) to vector \(\overrightarrow{AC}\). A positive sign indicates counterclockwise rotation, while a negative sign indicates clockwise rotation.
+
+Using this property, two points can be determined to lie on opposite sides of a directed line segment if their corresponding cross products have opposite signs. Therefore, the trajectory segment
+\[
+\overline{p_{t-1}^{(k)} p_t^{(k)}}
+\]
+and the counting segment
+\[
+\overline{L_1L_2}
+\]
+are considered intersecting if
+\[
+p_{t-1}^{(k)},\ p_t^{(k)}
+\]
+lie on opposite sides of \(\overline{L_1L_2}\), and simultaneously
+\[
+L_1,\ L_2
+\]
+lie on opposite sides of
+\[
+\overline{p_{t-1}^{(k)} p_t^{(k)}}.
+\]
+
+Under this condition, the object is considered to have crossed the counting line during the current frame interval.
+
+\subsubsection{Counting Results}
+
+Figure~\ref{fig:counting_result} shows the counting line placed across one exit branch of the circular intersection. Vehicles crossing this line segment are counted as outgoing vehicles from the roundabout.
+
+For visualization clarity, the displayed image is cropped and magnified around the counting line region. As a result, the count value displayed in the upper-left corner of the original video is outside the cropped region. The complete counting visualization can be found in the full inference video linked in the Appendix.
+
+The final counting result is 30 vehicles. Manual verification confirms that all crossing events are counted correctly without missed detections or duplicate counting.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/task2/frames/Count_Timeline 1_01_00_00_00.jpg}
+    \caption{Line-crossing counting visualization near the selected roadway exit of the roundabout.}
+    \label{fig:counting_result}
+\end{figure}

@@ -1,0 +1,25 @@
+\subsection{YOLOv8-Based Object Detection}
+
+Two YOLOv8 configurations are trained and evaluated in this work: YOLOv8n with an input resolution of $640 \times 640$, and YOLOv8s with an input resolution of $768 \times 768$.
+
+The first configuration, YOLOv8n-$640$, is designed as a lightweight baseline to verify the correctness of the training pipeline and provide a reference point for subsequent comparison. The second configuration, YOLOv8s-$768$, is designed as a higher-capacity setting under the hardware constraints of the experimental platform (\texttt{NVIDIA GeForce RTX 4060 Laptop GPU}, 8GB VRAM). Compared with the baseline, the second configuration jointly scales both the network capacity and the input image resolution in order to improve small-object detection performance in dense aerial scenes.
+
+It should be noted that the two configurations do not form a strict single-variable ablation study, since both the model scale (Nano $\rightarrow$ Small) and the input resolution ($640 \rightarrow 768$) are modified simultaneously. The purpose of this design is to investigate the practical trade-off between detection performance and computational cost under a fixed hardware resource budget.
+
+Table~\ref{tab:yolov8_configs} summarizes the main characteristics of the two configurations.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Comparison of the two YOLOv8 experimental configurations. GFLOPS and inference time are measured for single-image inference under the corresponding input resolution.}
+    \label{tab:yolov8_configs}
+    \begin{tabular}{lccc}
+        \toprule
+        Configuration & Parameters & GFLOPS & Inference Time \\
+        \midrule
+        YOLOv8n-$640$ & 3,012,798 & 8.204 & 1.309 ms \\
+        YOLOv8s-$768$ & 11,139,470 & 28.666 & 2.962 ms \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+As shown in Table~\ref{tab:yolov8_configs}, YOLOv8s-$768$ significantly increases both computational complexity and inference latency compared with YOLOv8n-$640$. However, the larger model capacity and higher input resolution are expected to improve feature extraction and localization performance for small-scale objects in the VisDrone dataset.
