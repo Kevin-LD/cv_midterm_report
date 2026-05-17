@@ -1,0 +1,18 @@
+\section{Task 3: Pixel-level Training Of Image Segmentation Models}
+
+In this task, we build a classic semantic segmentation network U-net, which includes the complete downsampling encoder, upsampling decoder and SkipConnection on Lightweight three-class segmentation dataset Oxford-IIIT Pet Dataset. With fixed training parameters and random initialization of weights, we aim at comparing the performance of models with 3 different loss functions. 
+
+To make comparison, we compare the mIoU performance on the validation set, the loss curve on training and validation set and also the accuracy on validation and testing set.
+
+\input{sections/task3/Dataset and Data Preprocessing.tex}
+
+\input{sections/task3/Unet_architecture.tex}
+
+\input{sections/task3/losses.tex}
+
+\input{sections/task3/training.tex}
+
+
+\input{sections/task3/performance analysis.tex}
+
+\input{sections/task3/summary.tex}

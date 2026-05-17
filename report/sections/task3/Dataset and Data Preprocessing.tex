@@ -1,0 +1,22 @@
+\subsection{Dataset and Data Processing}
+We use the Oxford-IIIT Pet Dataset for pixel-level segmentation. The dataset contains 37 categories
+of cats and dogs, with approximately 200 images per class. Following the official dataset split as we have mentioned in Task1.
+
+For semantic segmentation, the original trimap annotations are converted into three classes:
+\begin{itemize}
+    \item background,
+    \item pet foreground,
+    \item boundary region.
+\end{itemize}
+
+The mask labels are remapped to class indices $\{0,1,2\}$ for multi-class segmentation training.
+
+Meanwhile, all images and masks are resized to a fixed spatial resolution of $256 \times 256$. The RGB images are converted into tensors and normalized using the ImageNet mean and standard deviation:
+\[
+\mu = (0.485, 0.456, 0.406), \quad
+\sigma = (0.229, 0.224, 0.225).
+\]
+
+For segmentation masks, nearest-neighbor interpolation is used during resizing in order to preserve discrete class labels.
+
+The processed dataset is loaded using the PyTorch \texttt{DataLoader} with mini-batch training. The training data are shuffled at every epoch to improve training randomness.
