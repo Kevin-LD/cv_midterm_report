@@ -1,0 +1,94 @@
+\subsection{U-Net Architecture}
+
+In this project, a U-Net architecture is adopted for semantic segmentation. U-Net is a symmetric encoder-decoder network designed to capture both global context and fine-grained spatial details. Its key characteristic is the use of skip connections between corresponding encoder and decoder stages, which helps preserve high-resolution information during upsampling.
+
+\subsubsection{Overall Structure}
+
+The network consists of two main parts:
+\begin{itemize}
+    \item \textbf{Encoder (Downsampling path)}: gradually reduces spatial resolution while increasing feature channels.
+    \item \textbf{Decoder (Upsampling path)}: gradually restores spatial resolution while reducing feature channels.
+\end{itemize}
+
+A bottleneck layer connects the encoder and decoder, forming the deepest representation of the input features.
+
+\subsubsection{Convolutional Block}
+
+Each stage of both encoder and decoder is built using a convolutional block, which consists of two consecutive convolution layers:
+
+\[
+\text{ConvBlock} = \text{Conv2d} \rightarrow \text{ReLU} \rightarrow \text{Conv2d} \rightarrow \text{ReLU}
+\]
+
+Each convolution operation is defined as:
+
+\[
+\mathbf{y}_{i,j,k} = \sum_{c} \sum_{m,n} \mathbf{W}_{k,c,m,n} \cdot \mathbf{x}_{c,i+m,j+n}
+\]
+
+where the kernel extracts local spatial features while preserving spatial structure.
+
+\subsubsection{Downsampling (Encoder)}
+
+Downsampling is achieved using max pooling operations:
+
+\[
+H, W \rightarrow \frac{H}{2}, \frac{W}{2}
+\]
+
+At each stage, the number of feature channels is doubled while spatial resolution is halved:
+
+\[
+C \rightarrow 2C
+\]
+
+This design allows the network to capture increasingly abstract and high-level semantic information.
+
+\subsubsection{Bottleneck}
+
+The bottleneck layer represents the deepest part of the network, operating at the lowest spatial resolution but highest semantic richness. It aggregates global contextual information, which is essential for accurate segmentation decisions.
+
+\subsubsection{Upsampling (Decoder)}
+
+The decoder gradually restores spatial resolution using transposed convolution or upsampling operations:
+
+\[
+H, W \rightarrow 2H, 2W
+\]
+
+At each stage, the number of feature channels is reduced:
+
+\[
+C \rightarrow \frac{C}{2}
+\]
+
+This process reconstructs fine spatial details that were compressed during encoding.
+
+\subsubsection{Skip Connections}
+
+A key component of U-Net is the skip connection mechanism. At each corresponding encoder-decoder level, feature maps from the encoder are concatenated with the upsampled decoder features:
+
+\[
+\mathbf{F}_{dec}^{l} = \text{Concat}(\mathbf{F}_{up}^{l}, \mathbf{F}_{enc}^{l})
+\]
+
+This operation ensures that:
+
+\begin{itemize}
+    \item high-level semantic information from the decoder,
+    \item and fine-grained spatial details from the encoder
+\end{itemize}
+
+are jointly utilized.
+
+Skip connections significantly improve boundary accuracy and prevent loss of spatial information caused by repeated downsampling.
+
+\subsubsection{Final Prediction Layer}
+
+At the final stage, a $1 \times 1$ convolution is used to map feature maps to the desired number of classes:
+
+\[
+C_{in} \rightarrow C_{out}
+\]
+
+This layer produces per-pixel classification scores, which are then used to compute the final segmentation mask.

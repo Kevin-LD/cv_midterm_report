@@ -1,0 +1,84 @@
+\subsection{Loss functions}
+In this task, we use 3 kinds of loss functions to train the model:
+\begin{itemize}
+    \item Cross-Entropy Loss
+    \item DiceLoss
+    \item Combined:Cross-Entropy Loss + Dice Loss
+\end{itemize}
+
+\subsubsection{Dice Loss}
+In semantic segmentation tasks, conventional pixel-wise Cross-Entropy Loss may suffer from class imbalance problems, especially when the foreground region occupies only a small portion of the image. To solve this issue, Dice Loss is introduced in this project.
+
+Dice Loss measures the overlap between the predicted segmentation and the ground-truth mask. The Dice coefficient is defined as:
+
+\[
+\mathrm{Dice}(P, G)
+=
+\frac{2|P \cap G|}
+{|P| + |G|}
+\]
+
+where \(P\) denotes the predicted segmentation region and \(G\) denotes the ground-truth region.
+
+For neural network optimization, the differentiable formulation of Dice coefficient is used:
+
+\[
+\mathrm{Dice}
+=
+\frac{
+2 \sum_{i=1}^{N} p_i g_i + \epsilon
+}{
+\sum_{i=1}^{N} p_i
++
+\sum_{i=1}^{N} g_i
++
+\epsilon
+}
+\]
+
+where:
+\begin{itemize}
+    \item \(p_i\) is the predicted probability of pixel \(i\),
+    \item \(g_i\) is the ground-truth label of pixel \(i\),
+    \item \(N\) is the total number of pixels,
+    \item \(\epsilon\) is a small constant added for numerical stability.
+\end{itemize}
+
+Since training aims to minimize the objective function, Dice Loss is defined as:
+
+\[
+\mathcal{L}_{Dice}
+=
+1 - \mathrm{Dice}
+\]
+
+Compared with Cross-Entropy Loss, Dice Loss directly optimizes the overlap between prediction and ground truth, making it particularly suitable for semantic segmentation tasks with imbalanced class distributions.
+
+\subsubsection{Combined Loss Function}
+
+Although Dice Loss is effective for optimizing region overlap in semantic segmentation, it may lead to unstable training during the early stages because it focuses on global overlap rather than pixel-wise classification accuracy. On the other hand, Cross-Entropy Loss provides stable pixel-level supervision but may suffer from class imbalance problems.
+
+To leverage the advantages of both loss functions, this project combines Cross-Entropy Loss and Dice Loss with equal weighting:
+
+\[
+\mathcal{L}_{total}
+=
+\mathcal{L}_{CE}
++
+\mathcal{L}_{Dice}
+\]
+
+where:
+\begin{itemize}
+    \item \(\mathcal{L}_{CE}\) denotes the Cross-Entropy Loss,
+    \item \(\mathcal{L}_{Dice}\) denotes the Dice Loss.
+\end{itemize}
+
+The purpose of this combined loss function is to jointly optimize:
+\begin{itemize}
+    \item pixel-wise classification accuracy through Cross-Entropy Loss,
+    \item regional overlap consistency through Dice Loss.
+\end{itemize}
+
+Cross-Entropy Loss helps the network learn stable class predictions for individual pixels, while Dice Loss improves segmentation quality by directly maximizing the overlap between predicted masks and ground-truth masks.
+

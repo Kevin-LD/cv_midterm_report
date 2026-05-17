@@ -1,0 +1,22 @@
+\subsection{Training pipeline}
+The training pipeline is implemented in train.py, which includes training hyperparameter components, model settings, checkpoint saving, and training monitoring and history recording through wandb.
+
+
+The hyperparameter setting obtained from Task1 is partially reused in the segmentation task as a reference. Specifically, the AdamW optimizer is retained due to their effectiveness in transfer learning.
+
+However, due to the higher computational cost and memory consumption of pixel-wise segmentation, the batch size is reduced, and the number of training epochs is adjusted accordingly to ensure stable convergence.
+
+Therefore, we consider a batchsize of 16 and an early stopping strategy for a total 50 epoches.
+
+
+So, the final configuration is as follow:
+
+\[
+\text{optimizer} = \text{AdamW}, \quad
+\text{lr} = 5*10^{-4}, \quad
+\]
+\[
+\text{weight decay} = 10^{-4}, \quad
+\text{batch size} = 16, \quad
+\text{epochs} = 50.
+\]
