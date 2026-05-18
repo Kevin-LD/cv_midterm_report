@@ -1,22 +1,23 @@
 \subsection{Training pipeline}
-The training pipeline is implemented in train.py, which includes training hyperparameter components, model settings, checkpoint saving, and training monitoring and history recording through wandb.
 
+The training pipeline is implemented in \texttt{train.py}, which integrates model optimization, hyperparameter configuration, checkpoint saving, and training monitoring via \texttt{wandb}.
 
-The hyperparameter setting obtained from Task1 is partially reused in the segmentation task as a reference. Specifically, the AdamW optimizer is retained due to their effectiveness in transfer learning.
-
-However, due to the higher computational cost and memory consumption of pixel-wise segmentation, the batch size is reduced, and the number of training epochs is adjusted accordingly to ensure stable convergence.
-
-Therefore, we consider a batchsize of 16 and an early stopping strategy for a total 50 epoches.
-
-
-So, the final configuration is as follow:
+We adopt a two-stage training strategy. In the first stage, we conduct exploratory experiments on a high-resolution setting (256$\times$256) with small datasize to quickly evaluate model behavior, verify training stability, and compare different loss functions and configurations. In this stage, a smaller batch size and a higher number of epochs are used to allow sufficient iteration over the limited data while keeping computational cost low. Specifically, the exploratory training is configured as:
 
 \[
 \text{optimizer} = \text{AdamW}, \quad
-\text{lr} = 5*10^{-4}, \quad
-\]
-\[
+\text{lr} = 5 \times 10^{-4}, \quad
 \text{weight decay} = 10^{-4}, \quad
 \text{batch size} = 16, \quad
 \text{epochs} = 50.
+\]
+
+Based on the observations and convergence behaviors from the exploratory stage, we proceed to the final training stage on the low-resolution setting (128$\times$128). The final configuration is selected to balance training efficiency and convergence stability. In particular, a larger batch size is adopted to stabilize gradient updates. The final training configuration is summarized as follows:
+
+\[
+\text{optimizer} = \text{AdamW}, \quad
+\text{lr} = 5 \times 10^{-4}, \quad
+\text{weight decay} = 10^{-4}, \quad
+\text{batch size} = 64, \quad
+\text{epochs} = 15.
 \]
