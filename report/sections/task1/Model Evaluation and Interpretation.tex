@@ -6,13 +6,13 @@ The final selected model is the pretrained ResNet-34 baseline without additional
 
 \subsubsection{Confusion Matrix Analysis}
 
-Figure~\ref{fig:confusion_matrix} presents the confusion matrix on the test set. Most classes are classified accurately, while several visually similar breeds exhibit noticeable confusion.
+Figure~\ref{fig:confusion_matrix_1} presents the confusion matrix on the test set. Most classes are classified accurately, while several visually similar breeds exhibit noticeable confusion.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.92\textwidth]{figures/task1/confusion_matrix.png}
+    \includegraphics[width=\textwidth]{figures/task1/confusion_matrix.png}
     \caption{Confusion matrix of the best ResNet-34 model on the test set.}
-    \label{fig:confusion_matrix}
+    \label{fig:confusion_matrix_1}
 \end{figure}
 
 The most frequent confusion pairs include:
@@ -32,7 +32,7 @@ Representative failure cases are shown in Figure~\ref{fig:error_examples}.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/task1/error_example.png}
+    \includegraphics[width=\textwidth]{figures/task1/error_example.png}
     \caption{Representative misclassified examples from the test set.}
     \label{fig:error_examples}
 \end{figure}
@@ -43,7 +43,7 @@ Several factors may contribute to these errors. First, due to the fixed input re
 
 To further investigate the visual features learned by the network, DeepDream visualizations are generated for several representative classes. Figure~\ref{fig:deepdream_results} compares representative input images with the DeepDream visualizations of their corresponding classes.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     
     \begin{minipage}{0.2\textwidth}

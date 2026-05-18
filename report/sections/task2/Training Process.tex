@@ -4,18 +4,18 @@
 
 Both models are trained for 100 epochs using pretrained YOLOv8 weights. Unless otherwise specified, the training process follows the default Ultralytics YOLOv8 settings. The batch size is set to 8, mixed-precision training (AMP) is enabled, and the optimizer is automatically selected as MuSGD with an initial learning rate of 0.01 and momentum 0.9. Early stopping with a patience of 50 epochs is also enabled. Mosaic augmentation is applied with probability 1.0 throughout most of the training process and is automatically disabled during the final 10 epochs following the default YOLOv8 training strategy. The learning rate schedule uses a warm-up stage during the first three epochs, after which the learning rate decreases linearly toward zero, as shown in Figure~\ref{fig:lr_schedule}.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=0.32\textwidth]{figures/task2/LR schedule.png}
+    \includegraphics[width=0.5\textwidth]{figures/task2/LR schedule.png}
     \caption{Learning rate schedule during training.}
     \label{fig:lr_schedule}
 \end{figure}
 
 Figure~\ref{fig:training_batch} shows a representative augmented training batch containing 8 images. The visualization clearly demonstrates the effect of Mosaic augmentation, where multiple images are combined into a single training sample.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=0.6\textwidth]{figures/task2/training batch.jpg}
+    \includegraphics[width=0.7\textwidth]{figures/task2/training batch.jpg}
     \caption{Visualization of an augmented training batch.}
     \label{fig:training_batch}
 \end{figure}
@@ -28,7 +28,7 @@ For both models, the validation losses are initially lower than the training los
 
 Among the three loss components, the largest improvement of YOLOv8s-$768$ appears in Box Loss and Class Loss, while the difference in DFL Loss is comparatively smaller. In particular, the validation DFL losses of the two models converge to nearly identical values at the end of training.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.32\textwidth]{figures/task2/Box Loss.png}
     \hfill

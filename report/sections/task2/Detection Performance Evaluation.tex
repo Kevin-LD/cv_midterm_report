@@ -8,7 +8,7 @@ The detection performance of the two models on the validation set is summarized 
 \]
 This strategy places greater emphasis on localization quality under stricter IoU thresholds.
 
-\begin{table}[H]
+\begin{table}[h]
     \centering
     \caption{Detection performance comparison on the VisDrone validation set.}
     \label{tab:detection_results}
@@ -41,9 +41,9 @@ Figure~\ref{fig:map_curves} compares the validation mAP curves of the two models
 
 Figure~\ref{fig:pr_curve} shows the Precision--Recall curves of the two models for different object categories. For every category, the curves of YOLOv8s-$768$ are consistently closer to the upper-right corner, indicating better precision-recall trade-offs and larger Average Precision (AP) values across all classes.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=0.75\textwidth]{figures/task2/Precision Recall.png}
+    \includegraphics[width=0.85\textwidth]{figures/task2/Precision Recall.png}
     \caption{Precision--Recall curves of different object categories.}
     \label{fig:pr_curve}
 \end{figure}
@@ -56,9 +56,9 @@ To balance multi-class performance while maintaining deployment simplicity, the 
 \]
 In practice, category-specific confidence thresholds could also be adopted to further improve detection performance for particular object classes if required.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=0.75\textwidth]{figures/task2/F1 Confidence.png}
+    \includegraphics[width=0.85\textwidth]{figures/task2/F1 Confidence.png}
     \caption{Relationship between F1 score and confidence threshold.}
     \label{fig:f1_curve}
 \end{figure}
