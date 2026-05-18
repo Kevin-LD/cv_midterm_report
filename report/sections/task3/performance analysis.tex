@@ -81,7 +81,7 @@ Also, it's easy to see in Figure(a) that the orange curve is close to the sum of
 
 It's worth mentioning that in Figure(b), the green curve(CrossEntropy Loss) has a very sharp spike at the very beginning of training (the first two steps), surging to around 6.0, before quickly dropping back and remaining stable in subsequent training sessions. While the other 2 curves have smooth overall performance with no violent fluctuations. This is because: Cross-entropy focuses on the "accuracy of pixel classification." If the model mispredicts a rare category in a large area, it will trigger a severe penalty.Dice Loss focuses on region overlap. Because it considers the sum of the predicted and ground truth regions in its denominator, it is naturally immune to pixel imbalance. Therefore, its training and validation processes are more robust and smooth.
 
-\subsubsection{Confution Matrix Analysis}
+\subsubsection{Confusion Matrix Analysis}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/task3/confusion_matrix.png} 
