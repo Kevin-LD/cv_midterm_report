@@ -1,0 +1,11 @@
+\section{Conclusion}
+
+In this project, we complete three representative computer vision tasks based on deep learning, including image classification, object detection and multi-object tracking, and semantic segmentation.
+
+In Task 1, the pretrained ResNet-34 baseline achieves a validation accuracy of $95.38\%$ and a test accuracy of $92.53\%$ on the Oxford-IIIT Pet Dataset, demonstrating the effectiveness of transfer learning for fine-grained image classification. Experimental results also show that additional attention-based architectures, including SE-ResNet and ViT-Tiny, do not outperform the carefully tuned baseline model under the current experimental setting.
+
+In Task 2, the YOLOv8s-$768$ model achieves $\mathrm{mAP@50}=44\%$ and $\mathrm{mAP@50\text{-}95}=26\%$ on the VisDrone2019-DET dataset. Combined with ByteTrack, the tracking framework successfully maintains stable target identities under both short-term interaction and long-term occlusion scenarios, while the line-crossing counting module produces accurate counting results in real-world traffic videos.
+
+In Task 3, a U-Net segmentation model is implemented entirely from scratch without pretrained weights. Experimental comparison among different loss functions shows that the combined Cross-Entropy and Dice Loss achieves the best validation mIoU of $0.5919$, outperforming the individual loss formulations.
+
+Future work for Task 1 may include exploring larger pretrained models and more advanced transformer-based architectures. For Task 2, larger detection models and more sophisticated tracking association strategies can be further investigated. For Task 3, future improvements may focus on stronger segmentation backbones, boundary-aware loss functions, and higher-resolution prediction strategies.

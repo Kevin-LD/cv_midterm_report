@@ -1,8 +1,5 @@
 \documentclass[11pt,a4paper]{article}
 
-% =========================
-% Packages
-% =========================
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{geometry}
@@ -18,9 +15,6 @@
 
 \geometry{margin=1in}
 
-% =========================
-% Hyperref Setup
-% =========================
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
@@ -28,12 +22,7 @@
     citecolor=blue
 }
 
-% =========================
-% Title Information
-% =========================
-
-% TODO: Replace with actual report title
-\title{Midterm Report}
+\title{Midterm Project Report: Computer Vision Tasks with Deep Learning}
 
 % TODO: Add all team members and student IDs
 \author{
@@ -46,23 +35,12 @@
 
 \date{\today}
 
-% =========================
-% Document Begins
-% =========================
 \begin{document}
 
 \maketitle
 
-% =========================
-% Team Contribution
-% =========================
-
 % TODO: Describe team member contributions
 \section*{Team Contribution}
-
-% =========================
-% Abstract
-% =========================
 
 % TODO: Brief summary of the whole project
 \begin{abstract}
@@ -72,68 +50,15 @@
 \tableofcontents
 \newpage
 
-% =========================
-% Introduction
-% =========================
-
-% TODO: Introduction
-\section{Introduction}
-
+\input{sections/Introduction.tex}
 \input{sections/task1.tex}
 \input{sections/task2.tex}
-% =========================
-% Task 3
-% =========================
+\input{sections/task3.tex}
+\input{sections/Conclusion.tex}
 
-% TODO: Rename this section later
-\section{Task 3}
+\newpage
 
-% TODO: Segmentation dataset
-\subsection{Dataset}
-
-% TODO: U-Net architecture implementation
-\subsection{Network Architecture}
-
-% TODO: Loss function engineering
-\subsection{Loss Function Engineering}
-
-% TODO: Experimental setup
-\subsection{Experimental Setup}
-
-% TODO: Comparison between different losses
-\subsection{Loss Function Comparison}
-
-% TODO: Results and discussion
-\subsection{Results and Discussion}
-
-% =========================
-% Visualization and Logging
-% =========================
-
-% TODO: wandb / swanlab visualizations
-\section{Training Visualization and Logging}
-
-% =========================
-% Reproducibility
-% =========================
-
-% TODO: Github repo and model weight links
-\section{Code and Model Availability}
-
-% =========================
-% Conclusion
-% =========================
-
-% TODO: Overall conclusion and future work
-\section{Conclusion}
-
-% =========================
-% References
-% =========================
-
-\bibliographystyle{plain}
-
-% TODO: Add bibliography file
-\bibliography{references}
+% TODO: Repository, weights and video links.
+\section*{Appendix}
 
 \end{document}
