@@ -178,8 +178,18 @@ In the exploratory stage, this spatial uncertainty causes the contours to drift 
 Additionally, while the confusion between \textit{Pet Body} and \textit{Background} in the exploratory stage (0.1718) was driven by low-contrast textures like rugs or grass, the final stage introduces a reverse confusion (\textit{Background $\rightarrow$ Pet Body} at 0.1682). This indicates that exposure to highly diverse and cluttered environments forces the final model to occasionally over-segment complex environmental clutters as foreground structures. 
 
 The cross-stage comparison therefore suggests that while the remaining segmentation difficulty is largely caused by the fine-grained edge uncertainty and severe pixel-level class scale variations, the data expansion has successfully resolved the early optimization hurdles of macro-semantic recognition, driving the core target classification to near perfection.
+\subsection{Case Analysis}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/task3/comparison.png}
+    \label{fig:comparison}
+\end{figure}
+As observed in Figure(a) (Sample 23), the model demonstrates a remarkable capacity for capturing subtle localized boundaries and leveraging inherent prior features. On the right extremity of the cat's silhouette, the ground truth mask exhibits a subtle omission, failing to meticulously delineate the fine tip of the ear due to localized blurriness. Remarkably, the model optimized with the \textit{Dice Loss} successfully uncovers and encapsulates this delicate structure. This fine-grained segmentation underlines that by directly supervising regional overlap, the \textit{Dice Loss} inherently amplifies the gradient sensitivity toward peripheral boundaries, thereby rectifying minor human annotation omissions and revealing a robust localized structural perception.
 
 
+In Figure(b) (Sample 93), a distinct challenge emerges within regions subjected to severe environmental illumination and contrast degradation. The narrow spatial gap between the pet's front and hind limbs is characterized by a heavy cast shadow, drastically lowering the pixel-level contrast against the foreground body. The conventional \textit{Cross Entropy Loss} succumbs entirely to this background noise, falsely grouping the shadow domain into the foreground. In contrast, while both the \textit{Dice Loss} and the \textit{Combined Loss} do not fully eradicate this disturbance, they significantly constrain the false-positive area. This phenomenon demonstrates that the integration of region-based constraints helps the encoder suppress localized pixel-level noise by enforcing macro-geometric consistency.
+
+In Figure(c) (Sample 50), the visualization exposes a critical trade-off regarding spatial continuity and topological at complex semantic junctions. While the overall silhouette of the crouching cat is precisely captured, the \textit{Combined Loss} variant unexpectedly introduces a subtle topological fracture—manifesting as a narrow gap or structural discontinuity at the critical intersection where the neck transitions into the forelimbs. Interestingly, both the standalone \textit{Cross Entropy} and \textit{Dice Loss} maintain a continuous, smooth semantic transition in this specific zone. This over-segmentation artifact reveals that during multi-task joint optimization, the intricate gradient dynamics and scaling balance between pixel-wise alignment and regional intersection can occasionally induce localized under-segmentation at structurally non-rigid junctions.
 \subsection{Error Case Analysis}
 Representative failure cases are shown as follow:
 
