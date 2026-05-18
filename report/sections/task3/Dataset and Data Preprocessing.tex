@@ -11,7 +11,7 @@ For semantic segmentation, the original trimap annotations are converted into th
 
 The mask labels are remapped to class indices $\{0,1,2\}$ for multi-class segmentation training.
 
-Meanwhile, all images and masks are resized to a fixed spatial resolution of $256 \times 256$. The RGB images are converted into tensors and normalized using the ImageNet mean and standard deviation:
+Meanwhile, all images and masks are resized to a fixed spatial resolution of $128 \times 128$. The RGB images are converted into tensors and normalized using the ImageNet mean and standard deviation:
 \[
 \mu = (0.485, 0.456, 0.406), \quad
 \sigma = (0.229, 0.224, 0.225).
